@@ -1,0 +1,35 @@
+.register-container {
+    width: 300px;
+    margin: 0 auto;
+    padding-top: 50px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+  }
+  
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+  }
+  
+  .btn-success {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    border: none;
+    color: white;
+  }
+  
+  a {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
