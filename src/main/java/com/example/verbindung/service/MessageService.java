@@ -3,6 +3,7 @@ import com.example.verbindung.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.example.verbindung.model.Message;
 
 import java.time.LocalDateTime;
 import java.util.List;
