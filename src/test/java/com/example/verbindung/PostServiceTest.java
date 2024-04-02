@@ -1,7 +1,4 @@
 package com.example.verbindung;
-import com.example.verbindung.service.PostService;
-import com.example.verbindung.repository.PostRepository;
-import com.example.verbindung.model.PostEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
