@@ -1,5 +1,7 @@
 package com.example.verbindung;
 
+import com.example.verbindung.model.Message;
+import com.example.verbindung.model.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
