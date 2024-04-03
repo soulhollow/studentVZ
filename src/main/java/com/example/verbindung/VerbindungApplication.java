@@ -10,8 +10,6 @@ public class VerbindungApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(VerbindungApplication.class, args);
-		User user = new User("name","password","test");
-		System.out.println(user.getEmail());
 	}
 
 }
