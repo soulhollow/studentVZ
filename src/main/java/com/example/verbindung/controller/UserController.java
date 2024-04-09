@@ -1,4 +1,5 @@
 package com.example.verbindung.controller;
+import com.example.verbindung.UserData;
 import com.example.verbindung.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,5 +34,9 @@ public class UserController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-
+    @PostMapping("/login")
+    public boolean login(@RequestBody UserData userData){
+        System.out.println("Checkpoint 1");
+        return userService.login(userData.getEmail(),userData.getPassword());
+    }
 }

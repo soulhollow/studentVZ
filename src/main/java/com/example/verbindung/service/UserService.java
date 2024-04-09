@@ -15,6 +15,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+
     @Autowired
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
@@ -30,5 +31,20 @@ public class UserService {
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+    public Optional<User> findByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+    public boolean login(String email, String password){
+        System.out.println("geiloooo");
+        if(findByEmail(email)!=null){
+            if(passwordEncoder.matches(password,findByEmail(email).get().getPassword())){
 
+                System.out.println("true");
+                return true;
+            }
+        }
+        System.out.println("false");
+        return false;
+
+    }
 }
