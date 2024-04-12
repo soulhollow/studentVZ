@@ -1,6 +1,7 @@
 package com.example.verbindung.service;
 
 import com.example.verbindung.UserContext;
+import com.example.verbindung.UserData;
 import com.example.verbindung.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,8 @@ public class UserService {
     }
 
     @Transactional
-    public User registerNewUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    public User registerNewUser(UserData userData) {
+        User user = new User("löschen?", passwordEncoder.encode(userData.getPassword()), userData.getEmail());
         return userRepository.save(user);
     }
 
@@ -40,9 +41,9 @@ public class UserService {
         System.out.println("geiloooo");
         if(findByEmail(email)!=null){
             if(passwordEncoder.matches(password,findByEmail(email).get().getPassword())){
-                userContext.setLoggedInUser(findByEmail(email).get());
+                //userContext.setLoggedInUser(findByEmail(email).get());
                 System.out.println("true");
-                System.out.println("TestUserLoggedIn"+ userContext.getLoggedInUser());
+                //System.out.println("TestUserLoggedIn"+ userContext.getLoggedInUser());
                 return true;
             }
         }

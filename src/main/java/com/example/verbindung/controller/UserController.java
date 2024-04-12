@@ -21,9 +21,11 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> registerUser(@RequestBody User user) {
-        User registeredUser = userService.registerNewUser(user);
-        return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
+    public boolean registerUser(@RequestBody UserData userData) {
+        System.out.println("test 1");
+        User registeredUser = userService.registerNewUser(userData);
+        System.out.println("test "+registeredUser.toString());
+        return true;
     }
 
     @GetMapping("/{username}")
@@ -36,7 +38,14 @@ public class UserController {
 
     @PostMapping("/login")
     public boolean login(@RequestBody UserData userData){
-        System.out.println("Checkpoint 1");
-        return userService.login(userData.getEmail(),userData.getPassword());
+        try {
+            System.out.println("Check1");
+            String email = userData.getEmail();
+            String password = userData.getPassword();
+            return userService.login(email,password);
+        }catch (Exception e){
+            System.out.println("Check failed");
+            return false;
+        }
     }
 }

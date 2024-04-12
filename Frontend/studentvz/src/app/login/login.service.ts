@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { LoginComponent } from './login.component';
+import { Router } from '@angular/router';
+import { CreatePostComponent } from '../create-post/create-post.component';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class LoginService{
 
-  constructor() {
-  }
+  constructor(private http: HttpClient, private router: Router) { }
 
   login() {
     console.log("Checkpoint 0")
@@ -18,17 +21,21 @@ export class LoginService {
     const userData = {
       "email": email,
       "password": password
-
-      }
+    }
     console.log("Checkpoint -1")
-     const x = fetch('http://localhost:8080/api/users/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
 
-      body: JSON.stringify(userData)
-    })
-    console.log(x + " test")
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    this.http.post('http://localhost:8080/api/users/login', userData, { headers: headers })
+      .subscribe(response => {
+        console.log(response);
+        if (response === true) {
+          this.router.navigate(["\create"]);
+        }
+      }, error => {
+        console.error(error);
+      });
   }
 }
