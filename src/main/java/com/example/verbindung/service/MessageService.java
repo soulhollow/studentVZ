@@ -1,4 +1,6 @@
 package com.example.verbindung.service;
+import com.example.verbindung.UserContext;
+import com.example.verbindung.model.User;
 import com.example.verbindung.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,15 +14,20 @@ import java.util.List;
 public class MessageService {
 
     private final MessageRepository messageRepository;
+    private UserContext userContext= new UserContext();
 
     @Autowired
     public MessageService(MessageRepository messageRepository) {
         this.messageRepository = messageRepository;
+
     }
 
     @Transactional
     public Message postMessage(Message message) {
-        message.setTimestamp(LocalDateTime.now()); // Setze den Zeitstempel beim Erstellen der Nachricht
+        message.setTimestamp(LocalDateTime.now());// Setze den Zeitstempel beim Erstellen der Nachricht
+        /*if(userContext.getLoggedInUser()!=null){
+            message.setUser(userContext.getLoggedInUser());
+        }else{message.setUser(new User("t6est","46","test46"));}*/
         return messageRepository.save(message);
     }
 

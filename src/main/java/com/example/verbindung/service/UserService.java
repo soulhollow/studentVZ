@@ -1,5 +1,6 @@
 package com.example.verbindung.service;
 
+import com.example.verbindung.UserContext;
 import com.example.verbindung.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,9 +12,10 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+
+    private UserContext userContext;
 
 
     @Autowired
@@ -38,8 +40,9 @@ public class UserService {
         System.out.println("geiloooo");
         if(findByEmail(email)!=null){
             if(passwordEncoder.matches(password,findByEmail(email).get().getPassword())){
-
+                userContext.setLoggedInUser(findByEmail(email).get());
                 System.out.println("true");
+                System.out.println("TestUserLoggedIn"+ userContext.getLoggedInUser());
                 return true;
             }
         }

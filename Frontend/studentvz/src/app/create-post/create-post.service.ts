@@ -1,23 +1,20 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root'
 })
 export class CreatePostService {
 
-  constructor() {
-  }
-
+  constructor(private http: HttpClient) {}
 
   handleSubmit() {
-
     const headerInput = document.getElementById("header") as HTMLInputElement;
     const contentInput = document.getElementById("content") as HTMLInputElement;
 
     const headerValue = headerInput.value;
     const contentValue = contentInput.value;
 
-    // Erstelle das Datenobjekt, das an das Backend gesendet werden soll
     const messageData = {
       content: contentValue,
       header: headerValue,
@@ -27,17 +24,13 @@ export class CreatePostService {
         "password": "test",
         "email": "test@test"
       }
+    };
 
-    }
-
-    fetch('http://localhost:8080/api/messages/post', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-
-      body: JSON.stringify(messageData)
-    })
+    this.http.post('http://localhost:8080/api/messages/post', messageData)
+      .subscribe(response => {
+        console.log('Post erfolgreich erstellt:', response);
+      }, error => {
+        console.error('Fehler beim Erstellen des Posts:', error);
+      });
   }
 }
-
