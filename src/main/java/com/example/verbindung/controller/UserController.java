@@ -1,4 +1,5 @@
 package com.example.verbindung.controller;
+import com.example.verbindung.UserData;
 import com.example.verbindung.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,9 +21,11 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> registerUser(@RequestBody User user) {
-        User registeredUser = userService.registerNewUser(user);
-        return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
+    public boolean registerUser(@RequestBody UserData userData) {
+        System.out.println("test 1");
+        User registeredUser = userService.registerNewUser(userData);
+        System.out.println("test "+registeredUser.toString());
+        return true;
     }
 
     @GetMapping("/{username}")
@@ -33,5 +36,16 @@ public class UserController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-
+    @PostMapping("/login")
+    public boolean login(@RequestBody UserData userData){
+        try {
+            System.out.println("Check1");
+            String email = userData.getEmail();
+            String password = userData.getPassword();
+            return userService.login(email,password);
+        }catch (Exception e){
+            System.out.println("Check failed");
+            return false;
+        }
+    }
 }

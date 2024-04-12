@@ -1,5 +1,7 @@
 package com.example.verbindung.service;
 
+import com.example.verbindung.UserContext;
+import com.example.verbindung.UserData;
 import com.example.verbindung.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,9 +13,11 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+
+    private UserContext userContext;
+
 
     @Autowired
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
@@ -22,13 +26,29 @@ public class UserService {
     }
 
     @Transactional
-    public User registerNewUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    public User registerNewUser(UserData userData) {
+        User user = new User("löschen?", passwordEncoder.encode(userData.getPassword()), userData.getEmail());
         return userRepository.save(user);
     }
 
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+    public Optional<User> findByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+    public boolean login(String email, String password){
+        System.out.println("geiloooo");
+        if(findByEmail(email)!=null){
+            if(passwordEncoder.matches(password,findByEmail(email).get().getPassword())){
+                //userContext.setLoggedInUser(findByEmail(email).get());
+                System.out.println("true");
+                //System.out.println("TestUserLoggedIn"+ userContext.getLoggedInUser());
+                return true;
+            }
+        }
+        System.out.println("false");
+        return false;
 
+    }
 }

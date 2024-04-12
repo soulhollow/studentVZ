@@ -11,6 +11,8 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
+    private String header;
 
     @Column(nullable = false)
     private String content;
@@ -22,13 +24,22 @@ public class Message {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    public Message(String content, LocalDateTime timestamp, User user) {
+    public Message(String header, String content, LocalDateTime timestamp, User user) {
+        this.header = header;
         this.content = content;
         this.timestamp = timestamp;
         this.user = user;
     }
 
     public Message() {
+    }
+
+    public String getHeader() {
+        return header;
+    }
+
+    public void setHeader(String header) {
+        this.header = header;
     }
 
     public Long getId() {

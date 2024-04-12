@@ -21,6 +21,7 @@ public class MessageController {
 
     @PostMapping("/post")
     public ResponseEntity<Message> postMessage(@RequestBody Message message) {
+        System.out.println("test " + message.toString());
         Message postedMessage = messageService.postMessage(message);
         return new ResponseEntity<>(postedMessage, HttpStatus.CREATED);
     }
