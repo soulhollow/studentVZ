@@ -5,4 +5,6 @@ import {CreatePostComponent} from "./create-post/create-post.component";
 
 export const routes: Routes = [ { path: 'login', component: LoginComponent },
   { path: 'create', component: CreatePostComponent },
-{ path: 'register', component: RegisterComponent },];
+  { path: "**", component: LoginComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'register', component: RegisterComponent }];

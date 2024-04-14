@@ -10,8 +10,11 @@ import { MainFeedService } from './main-feed.service';
   styleUrl: './main-feed.component.css'
 })
 export class MainFeedComponent {
-  constructor(private router: Router, mainFeedService: MainFeedService) {
+
+  constructor(private router: Router, private mainFeedService: MainFeedService) {
+    this.mainFeedService = mainFeedService;
   }
+
   reload() {
     console.log("Relouding...");
     this.mainFeedService.reload();
