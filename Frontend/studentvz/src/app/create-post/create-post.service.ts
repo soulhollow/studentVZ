@@ -11,7 +11,6 @@ export class CreatePostService {
   handleSubmit() {
     const headerInput = document.getElementById("header") as HTMLInputElement;
     const contentInput = document.getElementById("content") as HTMLInputElement;
-
     const headerValue = headerInput.value;
     const contentValue = contentInput.value;
 
