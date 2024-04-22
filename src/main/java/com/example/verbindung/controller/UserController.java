@@ -22,9 +22,9 @@ public class UserController {
 
     @PostMapping("/register")
     public boolean registerUser(@RequestBody UserData userData) {
-        System.out.println("test 1");
+        System.out.println("Register API called");
         User registeredUser = userService.registerNewUser(userData);
-        System.out.println("test "+registeredUser.toString());
+        System.out.println("Registered new User "+registeredUser.toString());
         return true;
     }
 
@@ -39,12 +39,12 @@ public class UserController {
     @PostMapping("/login")
     public boolean login(@RequestBody UserData userData){
         try {
-            System.out.println("Check1");
+            System.out.println("Login API called");
             String email = userData.getEmail();
             String password = userData.getPassword();
             return userService.login(email,password);
         }catch (Exception e){
-            System.out.println("Check failed");
+            System.out.println("Login Exception");
             return false;
         }
     }

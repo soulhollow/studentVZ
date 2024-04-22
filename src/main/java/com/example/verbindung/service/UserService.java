@@ -27,6 +27,7 @@ public class UserService {
 
     @Transactional
     public User registerNewUser(UserData userData) {
+        System.out.println("registerNewUser entered");
         User user = new User("löschen?", passwordEncoder.encode(userData.getPassword()), userData.getEmail());
         return userRepository.save(user);
     }
@@ -38,16 +39,16 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
     public boolean login(String email, String password){
-        System.out.println("geiloooo");
+        System.out.println("login entered");
         if(findByEmail(email)!=null){
             if(passwordEncoder.matches(password,findByEmail(email).get().getPassword())){
                 //userContext.setLoggedInUser(findByEmail(email).get());
-                System.out.println("true");
+                System.out.println("login  successful");
                 //System.out.println("TestUserLoggedIn"+ userContext.getLoggedInUser());
                 return true;
             }
         }
-        System.out.println("false");
+        System.out.println("login failed");
         return false;
 
     }
