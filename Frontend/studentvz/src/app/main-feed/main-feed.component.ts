@@ -17,6 +17,6 @@ export class MainFeedComponent {
 
   reload() {
     console.log("Relouding...");
-    this.mainFeedService.reload();
+   // this.mainFeedService.reload();
   }
 }
