@@ -1,22 +1,29 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { MainFeedService } from './main-feed.service';
 
-@Component({
-  selector: 'app-main-feed',
-  standalone: true,
-  imports: [],
-  templateUrl: './main-feed.component.html',
-  styleUrl: './main-feed.component.css'
-})
-export class MainFeedComponent {
 
-  constructor(private router: Router, private mainFeedService: MainFeedService) {
-    this.mainFeedService = mainFeedService;
+@Component({
+  selector: 'app-chat-component',
+  templateUrl: './main-feed.component.html',
+  styleUrls: ['./main-feed.component.css']
+})
+export class ChatComponent implements OnInit {
+  messages: Message[] = [];
+
+  constructor(private mainFeedService: MainFeedService) { }
+
+  ngOnInit(): void {
+    this.loadMessages();
   }
 
-  reload() {
-    console.log("Relouding...");
-    this.mainFeedService.reload();
+  loadMessages(): void {
+    this.mainFeedService.getMessages().subscribe(
+      (response: Message[]) => {
+        this.messages = response;
+      },
+      (error: any) => {
+        console.error('Error loading messages:', error);
+      }
+    );
   }
 }
