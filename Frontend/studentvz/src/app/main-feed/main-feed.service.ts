@@ -1,4 +1,5 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -8,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class MainFeedService {
   constructor(private http: HttpClient, private router: Router) { }
-
+  
   getMessages(): Observable<Message[]> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'

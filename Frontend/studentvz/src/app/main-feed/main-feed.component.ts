@@ -17,13 +17,6 @@ export class ChatComponent implements OnInit {
   }
 
   loadMessages(): void {
-    this.mainFeedService.getMessages().subscribe(
-      (response: Message[]) => {
-        this.messages = response;
-      },
-      (error: any) => {
-        console.error('Error loading messages:', error);
-      }
-    );
+    this.mainFeedService.reload();
   }
 }
