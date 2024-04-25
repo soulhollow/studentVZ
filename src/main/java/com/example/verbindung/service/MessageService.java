@@ -14,7 +14,6 @@ import java.util.List;
 public class MessageService {
 
     private final MessageRepository messageRepository;
-    private UserContext userContext= new UserContext();
 
     @Autowired
     public MessageService(MessageRepository messageRepository) {
@@ -25,9 +24,9 @@ public class MessageService {
     @Transactional
     public Message postMessage(Message message) {
         message.setTimestamp(LocalDateTime.now());// Setze den Zeitstempel beim Erstellen der Nachricht
-        /*if(userContext.getLoggedInUser()!=null){
-            message.setUser(userContext.getLoggedInUser());
-        }else{message.setUser(new User("t6est","46","test46"));}*/
+        if(UserContext.getLoggedInUser()!=null){
+            message.setUser(UserContext.getLoggedInUser());
+        }
         return messageRepository.save(message);
     }
 

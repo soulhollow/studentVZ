@@ -16,7 +16,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    private UserContext userContext;
+
 
 
     @Autowired
@@ -38,11 +38,13 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
     public boolean login(String email, String password){
+
         System.out.println("geiloooo");
-        if(findByEmail(email)!=null){
+        if(findByEmail(email).isPresent()){
             if(passwordEncoder.matches(password,findByEmail(email).get().getPassword())){
-                //userContext.setLoggedInUser(findByEmail(email).get());
                 System.out.println("true");
+
+                UserContext.setLoggedInUser(findByEmail(email).get());
                 //System.out.println("TestUserLoggedIn"+ userContext.getLoggedInUser());
                 return true;
             }
