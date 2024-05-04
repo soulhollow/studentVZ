@@ -24,12 +24,10 @@ public class MessageService {
 
     @Transactional
     public Message postMessage(Message message) {
-        message.setTimestamp(LocalDateTime.now());
-        System.out.println("postMessage entered");
-        // Setze den Zeitstempel beim Erstellen der Nachricht
-        /*if(userContext.getLoggedInUser()!=null){
-            message.setUser(userContext.getLoggedInUser());
-        }else{message.setUser(new User("t6est","46","test46"));}*/
+        message.setTimestamp(LocalDateTime.now());// Setze den Zeitstempel beim Erstellen der Nachricht
+        if(UserContext.getLoggedInUser()!=null){
+            message.setUser(UserContext.getLoggedInUser());
+        }
         return messageRepository.save(message);
     }
 

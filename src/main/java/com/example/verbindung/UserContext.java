@@ -12,11 +12,11 @@ public class UserContext {
     public UserContext userContext(){
         return new UserContext();
     }
-    public User getLoggedInUser() {
+    public static User getLoggedInUser() {
         return loggedInUser;
     }
 
-    public void setLoggedInUser(User loggedInUser) {
-        this.loggedInUser = loggedInUser;
+    public static void setLoggedInUser(User loggedInUser) {
+        UserContext.loggedInUser = loggedInUser;
     }
 }

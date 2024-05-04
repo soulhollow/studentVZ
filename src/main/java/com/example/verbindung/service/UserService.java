@@ -39,16 +39,18 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
     public boolean login(String email, String password){
-        System.out.println("login entered");
-        if(findByEmail(email)!=null){
+
+        System.out.println("geiloooo");
+        if(findByEmail(email).isPresent()){
             if(passwordEncoder.matches(password,findByEmail(email).get().getPassword())){
-                //userContext.setLoggedInUser(findByEmail(email).get());
-                System.out.println("login  successful");
+                System.out.println("true");
+
+                UserContext.setLoggedInUser(findByEmail(email).get());
                 //System.out.println("TestUserLoggedIn"+ userContext.getLoggedInUser());
                 return true;
             }
         }
-        System.out.println("login failed");
+        System.out.println("false");
         return false;
 
     }
