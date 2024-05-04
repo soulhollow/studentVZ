@@ -14,6 +14,7 @@ import java.util.List;
 public class MessageService {
 
     private final MessageRepository messageRepository;
+    private UserContext userContext= new UserContext();
 
     @Autowired
     public MessageService(MessageRepository messageRepository) {
