@@ -16,7 +16,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-
+    private UserContext userContext;
 
 
     @Autowired
@@ -27,6 +27,7 @@ public class UserService {
 
     @Transactional
     public User registerNewUser(UserData userData) {
+        System.out.println("registerNewUser entered");
         User user = new User("löschen?", passwordEncoder.encode(userData.getPassword()), userData.getEmail());
         return userRepository.save(user);
     }

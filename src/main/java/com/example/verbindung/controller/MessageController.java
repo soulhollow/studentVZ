@@ -23,7 +23,7 @@ public class MessageController {
 
     @PostMapping("/post")
     public ResponseEntity<Message> postMessage(@RequestBody Message message) {
-        System.out.println("test " + message.toString());
+        System.out.println("post API called" + message.toString());
         Message postedMessage = messageService.postMessage(message);
         return new ResponseEntity<>(postedMessage, HttpStatus.CREATED);
     }
