@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
 import { MainFeedService } from './main-feed.service';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
+import { Message } from '../message';
+import { NgFor } from '@angular/common';
 
 
 
 @Component({
   selector: 'app-chat-component',
-
+  standalone: true,
   templateUrl: './main-feed.component.html',
   styleUrls: ['./main-feed.component.css'],
-  imports: [Message]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [NgFor]
 })
 export class ChatComponent implements OnInit {
   messages: Message[] = [];
@@ -19,9 +22,10 @@ export class ChatComponent implements OnInit {
   ngOnInit(): void {
     this.reload();
   }
+  
 
   reload() {
-    console.log("Relouding...");
-    this.mainFeedService.getMessages().pipe(tap({next: (messages: Message[]) => {this.messages = messages}}))
+    this.mainFeedService.getMessages().subscribe(data => {console.log(data); data = this.messages;});
+    console.log(this.messages);
   }
 }

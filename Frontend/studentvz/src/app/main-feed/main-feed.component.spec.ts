@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MainFeedComponent } from './main-feed.component';
+import { ChatComponent } from './main-feed.component';
 
 describe('MainFeedComponent', () => {
-  let component: MainFeedComponent;
-  let fixture: ComponentFixture<MainFeedComponent>;
+  let component: ChatComponent;
+  let fixture: ComponentFixture<ChatComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MainFeedComponent]
+      imports: [ChatComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(MainFeedComponent);
+    fixture = TestBed.createComponent(ChatComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
