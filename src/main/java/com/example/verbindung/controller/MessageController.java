@@ -1,4 +1,5 @@
 package com.example.verbindung.controller;
+import com.example.verbindung.TOMessage;
 import com.example.verbindung.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -6,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.verbindung.model.Message;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -27,9 +29,14 @@ public class MessageController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Message>> getAllMessages() {
+    public ResponseEntity<List<TOMessage>> getAllMessages() {
         List<Message> messages = messageService.findAllMessages();
-        return new ResponseEntity<>(messages, HttpStatus.OK);
+        System.out.println("test " + messages.toString());
+        ArrayList<TOMessage> toMessage = new ArrayList<>();
+        for (Message message : messages) {
+            toMessage.add(new TOMessage(message));
+        }
+        return new ResponseEntity<>(toMessage.stream().toList(), HttpStatus.OK);
     }
 
     @GetMapping("/user/{userId}")
