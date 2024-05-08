@@ -2,7 +2,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Message } from '../message';
+import { Message } from '../Message';
 import { Observable, map, tap } from 'rxjs';
 
 

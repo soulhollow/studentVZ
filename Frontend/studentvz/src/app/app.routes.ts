@@ -2,13 +2,13 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import {CreatePostComponent} from "./create-post/create-post.component";
-import {MainFeedComponent} from "./main-feed/main-feed.component";
+import {ChatComponent} from "./main-feed/main-feed.component";
 import {LandingpageComponent} from "./landingpage/landingpage.component";
 
 export const routes: Routes = [ { path: 'login', component: LoginComponent },
   { path: 'create', component: CreatePostComponent },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'landing', pathMatch: 'full' },
   { path: 'register', component: RegisterComponent },
-  {path: 'main',component: MainFeedComponent},
+  {path: 'main',component: ChatComponent},
   {path: 'landing',component: LandingpageComponent},
-  { path: "**", component: LoginComponent },];
+  { path: "**", component: LandingpageComponent },];

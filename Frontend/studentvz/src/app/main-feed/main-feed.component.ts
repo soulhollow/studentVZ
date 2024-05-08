@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
 import { MainFeedService } from './main-feed.service';
 import { Observable, tap } from 'rxjs';
-import { Message } from '../message';
+import { Message } from '../Message';
 import { NgFor } from '@angular/common';
 
 
@@ -25,7 +25,7 @@ export class ChatComponent implements OnInit {
   
 
   reload() {
-    this.mainFeedService.getMessages().subscribe(data => {console.log(data); data = this.messages;});
+    this.mainFeedService.getMessages().subscribe(data => {console.log(data); this.messages = data;});
     console.log(this.messages);
   }
 }
